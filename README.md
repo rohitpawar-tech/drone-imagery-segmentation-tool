@@ -48,3 +48,9 @@ Each tile is converted into a compact feature vector using lightweight handcraft
 ### 3. Pseudo-Label Generation
 Because no labeled dataset is assumed, the pipeline assigns initial labels using heuristic rules derived from tile characteristics.
 
+Examples:
+- high green dominance → likely vegetation
+- low brightness / blue-heavy regions → potential water
+- high edge density + neutral tones → possible built structures or roads
+
+These pseudo-labels are intentionally approximate and act as weak supervision rather than ground truth.
