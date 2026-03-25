@@ -11,3 +11,6 @@ This project processes aerial images by splitting them into tiles, extracting ha
 - Soil
 - Roads
 - Built Structures
+The solution is intentionally designed to be **simple, interpretable, and practical**, making it suitable for rapid analysis when labeled training data is unavailable.
+
+---
