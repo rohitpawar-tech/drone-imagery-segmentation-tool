@@ -70,3 +70,12 @@ The tile predictions are then reconstructed into:
 - and a confidence heatmap.
 
 ---
+## Key Design Decisions
+
+This project intentionally uses a **classical ML + heuristics** approach rather than deep learning for the following reasons:
+
+- **No dependency on labeled data**
+- **Fast iteration and low setup overhead**
+- **Transparent, explainable decision flow**
+- **Lightweight execution on standard machines**
+- **Appropriate complexity for assignment-scale evaluation**
