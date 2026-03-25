@@ -96,3 +96,18 @@ The pipeline supports the following image formats:
 - OpenCV is used for standard image formats and simple TIFF-compatible cases.
 - For large GeoTIFF inputs, resizing is recommended to reduce memory usage and improve runtime.
 
+---
+
+## Project Structure
+
+```text
+drone_ai_assignment/
+├── data/               # Input images (e.g., Drone_SAMPLE.tif)
+├── outputs/            # Generated predictions and visualizations
+├── src/                # Source code modules
+├── main.py             # Entry point for the pipeline
+├── requirements.txt    # Python dependencies
+└── README.md           # Project documentation
+````
+
+---
