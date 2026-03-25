@@ -111,3 +111,15 @@ drone_ai_assignment/
 ````
 
 ---
+## Installation
+
+### Requirements
+
+* Python **3.8+**
+* `pip`
+
+### Setup
+
+1. Clone or download the project.
+2. Open a terminal in the project root.
+3. Install dependencies:
