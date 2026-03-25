@@ -22,3 +22,7 @@ To address this, this project uses a **weakly supervised classical machine learn
 - remains computationally lightweight,
 - produces interpretable outputs,
 - and is easy to extend or replace with stronger models later.
+
+This makes it a strong baseline for quick experimentation, land-cover prototyping, or assignment-scale remote sensing tasks.
+
+---
