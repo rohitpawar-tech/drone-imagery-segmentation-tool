@@ -33,3 +33,6 @@ The pipeline follows a five-stage workflow:
 The input image is divided into fixed-size square patches (default: `64x64` pixels).
 
 This keeps processing manageable and allows the pipeline to operate consistently on both standard images and large aerial maps.
+### 2. Feature Extraction
+Each tile is converted into a compact feature vector using lightweight handcrafted descriptors:
+
