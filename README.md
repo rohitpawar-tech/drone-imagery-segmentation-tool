@@ -91,3 +91,8 @@ The pipeline supports the following image formats:
 - `JPEG`
 - `TIF`
 - `TIFF`
+- ### TIFF / GeoTIFF Handling
+- `rasterio` is preferred for `TIF/TIFF` files, especially large or geospatial TIFFs.
+- OpenCV is used for standard image formats and simple TIFF-compatible cases.
+- For large GeoTIFF inputs, resizing is recommended to reduce memory usage and improve runtime.
+
