@@ -29,3 +29,5 @@ This makes it a strong baseline for quick experimentation, land-cover prototypin
 ## Methodology
 
 The pipeline follows a five-stage workflow:
+### 1. Image Tiling
+The input image is divided into fixed-size square patches (default: `64x64` pixels).
