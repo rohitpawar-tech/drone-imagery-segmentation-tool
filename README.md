@@ -42,3 +42,9 @@ Each tile is converted into a compact feature vector using lightweight handcraft
   - Shannon entropy to estimate local visual complexity
 - **Structure**
   - Edge density using Canny edge detection
+ 
+    These features were chosen to balance interpretability, speed, and reasonable discrimination across common land-cover types.
+
+### 3. Pseudo-Label Generation
+Because no labeled dataset is assumed, the pipeline assigns initial labels using heuristic rules derived from tile characteristics.
+
