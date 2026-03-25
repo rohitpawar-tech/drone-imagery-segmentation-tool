@@ -86,3 +86,8 @@ This project intentionally uses a **classical ML + heuristics** approach rather 
 ## Supported Input Formats
 
 The pipeline supports the following image formats:
+- `PNG`
+- `JPG`
+- `JPEG`
+- `TIF`
+- `TIFF`
