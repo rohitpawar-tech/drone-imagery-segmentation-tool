@@ -14,3 +14,6 @@ This project processes aerial images by splitting them into tiles, extracting ha
 The solution is intentionally designed to be **simple, interpretable, and practical**, making it suitable for rapid analysis when labeled training data is unavailable.
 
 ---
+## Overview
+
+In many drone-imagery workflows, labeled datasets are expensive to create and difficult to maintain across varying geographies, lighting conditions, and sensors.
