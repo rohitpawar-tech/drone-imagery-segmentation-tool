@@ -123,3 +123,228 @@ drone_ai_assignment/
 1. Clone or download the project.
 2. Open a terminal in the project root.
 3. Install dependencies:
+4. 
+
+```bash
+pip install -r requirements.txt
+```
+
+> **Note:**
+> `rasterio` is recommended for TIFF / GeoTIFF support.
+> If installation is problematic on a local machine, the project can still run on standard image formats using OpenCV.
+
+---
+
+## Usage
+
+Run the pipeline from the command line.
+
+### Basic Example
+
+```bash
+python main.py --input data/Drone_SAMPLE.tif --output-dir outputs
+```
+
+### Recommended Example for Large TIFF Inputs
+
+```bash
+python main.py --input data/Drone_SAMPLE.tif --tile-size 64 --resize-width 1024 --resize-height 1024 --output-dir outputs
+```
+
+This resized mode is recommended for large drone imagery because it:
+
+* reduces memory pressure,
+* speeds up feature extraction,
+* and keeps output generation predictable.
+
+---
+
+## Command-Line Arguments
+
+| Argument          | Type  | Required | Default   | Description                                |
+| ----------------- | ----- | -------- | --------- | ------------------------------------------ |
+| `--input`         | `str` | Yes      | —         | Path to the input image file               |
+| `--output-dir`    | `str` | No       | `outputs` | Directory where output files will be saved |
+| `--tile-size`     | `int` | No       | `64`      | Size of square tiles in pixels             |
+| `--resize-width`  | `int` | No       | `None`    | Optional resize width before processing    |
+| `--resize-height` | `int` | No       | `None`    | Optional resize height before processing   |
+
+---
+
+## Output Artifacts
+
+The pipeline generates the following files in the output directory:
+
+### 1. `predictions.csv`
+
+Tile-level structured predictions containing:
+
+* `tile_id`
+* `x`
+* `y`
+* `predicted_class`
+* `confidence`
+
+This file is useful for downstream analysis, validation, or integration with external tools.
+
+### 2. `classified_map.png`
+
+A color-coded land-cover segmentation map reconstructed from tile predictions.
+
+### 3. `classification_overlay.png`
+
+The classified map blended with the original image to provide visual context and improve interpretability.
+
+### 4. `confidence_heatmap.png`
+
+A confidence visualization showing where the model is more or less certain about its predictions.
+
+---
+
+## Example Execution (Validated)
+
+The pipeline was successfully tested on a large TIFF drone image using the following command:
+
+```bash
+python main.py --input data/Drone_SAMPLE.tif --tile-size 64 --resize-width 1024 --resize-height 1024 --output-dir outputs
+```
+
+### Successful outputs generated:
+
+* `predictions.csv`
+* `classified_map.png`
+* `classification_overlay.png`
+* `confidence_heatmap.png`
+
+This confirms that the full pipeline executes end-to-end successfully on a real TIFF input.
+
+---
+
+## Technical Assumptions
+
+This implementation makes the following practical assumptions:
+
+1. **Broad land-cover categories are visually separable at tile scale**
+   The approach assumes that classes such as vegetation, soil, roads, and built structures have sufficiently distinct color / texture signatures in many cases.
+
+2. **Heuristic pseudo-labels are noisy but directionally useful**
+   The initial labels are not treated as ground truth. They are expected to be imperfect, but useful enough to bootstrap a simple classifier.
+
+3. **A resized working resolution is acceptable for assignment-scale inference**
+   For very large source imagery, resizing is used as a pragmatic tradeoff between speed, memory, and spatial detail.
+
+---
+
+## Limitations
+
+### 1. Heuristic Sensitivity
+
+Pseudo-label quality depends heavily on image appearance.
+
+Performance may degrade if:
+
+* lighting conditions are extreme,
+* the image is captured at night or dusk,
+* strong color grading is present,
+* or terrain classes visually overlap.
+
+### 2. Memory Footprint
+
+The pipeline processes the full working image in memory after loading.
+
+For very large source imagery, especially high-resolution TIFFs, this may become expensive on machines with limited RAM.
+
+### 3. Tile Boundary Artifacts
+
+Because predictions are tile-based, class transitions may appear blocky or overly sharp.
+
+This is a known tradeoff of fixed-grid inference and is common in simple patch-based segmentation pipelines.
+
+### 4. No Spatial Context Between Tiles
+
+Each tile is processed independently.
+
+This means the classifier does not explicitly model:
+
+* neighborhood continuity,
+* object shape,
+* or larger scene context.
+
+---
+
+## Potential Improvements
+
+The current implementation is intentionally lightweight, but there are several clear upgrade paths:
+
+### 1. Overlapping Tiles / Sliding Window
+
+Use a stride smaller than the tile size to reduce blocking artifacts and improve boundary quality.
+
+### 2. Chunked TIFF Processing
+
+Process very large aerial imagery in windows instead of loading the full image at once.
+
+This would improve scalability for production-sized maps.
+
+### 3. Richer Texture Features
+
+Add more discriminative handcrafted descriptors such as:
+
+* GLCM texture metrics
+* Local Binary Patterns (LBP)
+* gradient histogram features
+
+### 4. Deep Feature Extraction
+
+Replace or augment handcrafted features with embeddings from a lightweight CNN such as:
+
+* MobileNet
+* EfficientNet-lite
+
+This would likely improve robustness if higher accuracy is required.
+
+### 5. Supervised Training Mode
+
+Support training on real labeled tiles or masks when annotations are available.
+
+This would allow the same project structure to evolve from:
+
+* heuristic baseline → weak supervision → fully supervised workflow
+
+---
+
+## Why This Approach Works Well for This Assignment
+
+This solution is a good fit for an assignment setting because it demonstrates:
+
+* practical Python engineering
+* image preprocessing
+* feature engineering
+* weak supervision / pseudo-labeling
+* classical machine learning
+* structured output generation
+* visualization for interpretability
+* reasonable handling of large TIFF imagery
+
+It is intentionally designed to be:
+
+* lightweight,
+* explainable,
+* easy to run,
+* and easy to discuss in a technical interview.
+
+---
+
+## Summary
+
+This project implements a practical and interpretable baseline for drone imagery segmentation using:
+
+* tile-based preprocessing,
+* handcrafted feature extraction,
+* heuristic pseudo-label generation,
+* Random Forest classification,
+* and visualization of model outputs.
+
+While it is not intended to replace a fully supervised deep learning segmentation pipeline, it provides a strong, efficient starting point for land-cover analysis when labeled data is unavailable.
+
+
