@@ -35,4 +35,10 @@ The input image is divided into fixed-size square patches (default: `64x64` pixe
 This keeps processing manageable and allows the pipeline to operate consistently on both standard images and large aerial maps.
 ### 2. Feature Extraction
 Each tile is converted into a compact feature vector using lightweight handcrafted descriptors:
-
+- **Color statistics**
+  - Mean and standard deviation of RGB channels
+  - Mean and standard deviation of HSV channels
+- **Texture**
+  - Shannon entropy to estimate local visual complexity
+- **Structure**
+  - Edge density using Canny edge detection
