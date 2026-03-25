@@ -54,3 +54,10 @@ Examples:
 - high edge density + neutral tones → possible built structures or roads
 
 These pseudo-labels are intentionally approximate and act as weak supervision rather than ground truth.
+### 4. Model Training
+A `RandomForestClassifier` is trained on the pseudo-labeled feature set.
+
+This step allows the system to:
+- smooth out hard heuristic boundaries,
+- learn more flexible decision rules,
+- and produce more consistent tile-level predictions than fixed rules alone.
