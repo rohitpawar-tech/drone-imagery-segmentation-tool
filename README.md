@@ -61,3 +61,12 @@ This step allows the system to:
 - smooth out hard heuristic boundaries,
 - learn more flexible decision rules,
 - and produce more consistent tile-level predictions than fixed rules alone.
+- ### 5. Prediction and Reconstruction
+The trained classifier predicts a class and confidence score for every tile.
+
+The tile predictions are then reconstructed into:
+- a full classified land-cover map,
+- a visualization overlay on the original image,
+- and a confidence heatmap.
+
+---
