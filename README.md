@@ -26,3 +26,6 @@ To address this, this project uses a **weakly supervised classical machine learn
 This makes it a strong baseline for quick experimentation, land-cover prototyping, or assignment-scale remote sensing tasks.
 
 ---
+## Methodology
+
+The pipeline follows a five-stage workflow:
