@@ -17,3 +17,4 @@ The solution is intentionally designed to be **simple, interpretable, and practi
 ## Overview
 
 In many drone-imagery workflows, labeled datasets are expensive to create and difficult to maintain across varying geographies, lighting conditions, and sensors.
+To address this, this project uses a **weakly supervised classical machine learning pipeline** that:
