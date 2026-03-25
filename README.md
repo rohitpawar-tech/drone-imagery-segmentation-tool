@@ -79,3 +79,10 @@ This project intentionally uses a **classical ML + heuristics** approach rather 
 - **Transparent, explainable decision flow**
 - **Lightweight execution on standard machines**
 - **Appropriate complexity for assignment-scale evaluation**
+- While a CNN-based solution may improve accuracy with labeled data, this implementation prioritizes clarity, reliability, and practical constraints.
+
+---
+
+## Supported Input Formats
+
+The pipeline supports the following image formats:
